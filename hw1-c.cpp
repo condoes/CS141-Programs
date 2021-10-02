@@ -6,18 +6,20 @@ using namespace std;
 
 bool checkDuplicate(vector<int> grades, int num) {
     for(unsigned int i = 0; i < grades.size(); i++) {
-        if(num != grades.at(i)) {
-            return true;
+
+        if(num == grades.at(i)) {
+            //cout << num << " matches " << grades.at(i) << endl;
+            return false;
         }
     }
-    return false;
+    return true;
 }
 
 int main(){
     int n; //number of students
-    int num;
+    int num; // number to add into vector
 
-    //cout << "Enter n \n";
+    //cout << "Enter size of vector: \n";
 
     cin >> n;
     
@@ -27,28 +29,28 @@ int main(){
     grades.push_back(num);
 
     for(unsigned int i = 0; i < n-1; i++) { //populate array
+
         cin >> num;
+        //cout << "Checking if " << num << " is in the vector" << endl;
 
         if(checkDuplicate(grades, num)) {
             grades.push_back(num);
         }
     }
+    
 
     sort(grades.begin(), grades.end(), greater<int>()); //sort grades
 
     int m = 0; //num of queries
-    int grade; // ranks
+    int rank; // ranks
     cin >> m;
 
-    for(unsigned int i = 0; i < m; i++) {
-        cin >> grade;
-        vector<int>::iterator index = find(grades.begin(), grades.end(), grade);
-        cout << distance(grades.begin(), index) + 1 << endl;
+    for(unsigned int i = 0; i < m; i++){
+        cin >> rank;
+        cout << grades.at(rank-1) << endl;
     }
 
-    // for(unsigned int i = 0; i < grades.size(); i++) {
-    //     cout << grades.at(i) << "\n";
-    // }
+    
 
     return 0;
 }
